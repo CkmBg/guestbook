@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conference Guestbook - {{ burger }}{% endblock %}
+
+{% block body %}
+    <h2>{{ burger }}</h2>
+                <img src="{{ burger.image }}" style="max-width: 200px" />
+
+            <h4>{{ burger.description }}</h4>
+            <small>
+                {{ burger.price }}
+            </small>
+
+    {# {% if burger|length > 0 %}
+        {% for burger in burger %}
+            {% if burger.image %}
+                <img src="{{ burger.image }}" style="max-width: 200px" />
+            {% endif %}
+
+            <h4>{{ burger.image }}</h4>
+            <small>
+                {{ burger.price|format_datetime('medium', 'short') }}
+            </small>
+
+            <p>{{ burger.desc }}</p>
+        {% endfor %}
+    {% else %} #}
+        {# <div>No burger have been posted yet for this burger.</div>
+    {% endif %} #}
+{% endblock %}
