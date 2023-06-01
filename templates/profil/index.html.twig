@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detail{% endblock %}
+
+{% block body %}
+
+    <div class="m-4 p-4">
+        <div class="m-5 p-5">
+            <div class="alert h2">
+                Profil Setting 
+            </div>
+            <small>leave as you see if you don't want to change it!</small>
+        </div>
+
+        <div class="border p-2">
+            <h2>Information</h2>
+            {{ form_start(form) }}
+
+                <div>
+                    <label for="content">{{form_label(form.email)}}</label>
+                    {{form_widget(form.email, { 'attr': {'class': 'form-control'} })}}
+                </div>
+
+                <div>
+                    <label for="content">{{form_label(form.name)}}</label>
+                    {{form_widget(form.name, { 'attr': {'class': 'form-control'} })}}
+                </div>
+
+                {{
+                    form_errors(form)
+                }}
+
+                <button type="submit" class="btn mt-3">Submit</button>
+                
+            {{ form_end(form) }}
+        </div>
+
+        <div class="border p-2 mt-2">
+            <h2>Password</h2>
+            {{ form_start(formp) }}
+
+                <div>
+                    <label for="content">{{form_label(formp.password.first)}}</label>
+                    {{form_widget(formp.password.first, { 'attr': {'class': 'form-control'} })}}
+                </div>
+
+                <div>
+                    <label for="content">{{form_label(formp.password.second)}}</label>
+                    {{form_widget(formp.password.second, { 'attr': {'class': 'form-control'} })}}
+                </div>
+
+                {{
+                    form_errors(formp)
+                }}
+
+                <button type="submit" class="btn mt-3">Submit</button>
+                
+            {{ form_end(form) }}
+        </div>
+
+    </div>
+{% endblock %}

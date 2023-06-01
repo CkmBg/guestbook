@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detail{% endblock %}
+
+{% block body %}
+
+    
+    <div class="m-4 p-4">
+        <div class="m-5 p-5">
+            <div class="alert alert-warning">
+                Order palced successfully ! 
+            </div>
+        </div>
+
+
+
+        <div class="border p-2">
+            {{ form_start(form) }}
+
+                <div>
+                    <label for="content">Leave a {{form_label(form.text)}}</label>
+                    {{form_widget(form.text, { 'attr': {'class': 'form-control'} })}}
+                </div>
+                <div>
+                    <label for="file">{{form_label(form.photoFilename)}}</label>
+                    {{form_widget(form.photoFilename, { 'attr': {'class': 'form-control'} })}}
+                </div>
+
+
+                {{
+                    form_errors(form.text)
+                }}
+
+                <button type="submit" class="btn mt-3">Submit</button>
+                
+            {{ form_end(form) }}
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detail{% endblock %}
+
+{% block body %}
+
+    <h2 class="m-4 p-4"> {{ " " }} </h2>
+    <div class="m-4 p-4">
+        <h2>Detail {{ food.name }}</h2>
+        <div class="d-flex">
+            <img src="{{ food.image }}" class="reponsive m-2" style="max-width: 300px" />
+            <div class="mt-2">
+                <h4>{{ food.description }}</h4>
+                <h2>
+                     Price : <em style="color:red;"> {{ food.price }} € </em>
+                </h2>
+                <a class="btn btn-danger m-3" href="{{ path('food_add', { id: food.id }) }}">
+                    Add to Card
+                </a>
+            </div>
+        </div>
+
+
+        <div class="border p-2">
+            {{ form_start(form) }}
+
+                <div>
+                    <label for="content">Leave a {{form_label(form.content)}}</label>
+                    {{form_widget(form.content, { 'attr': {'class': 'form-control'} })}}
+                </div>
+
+
+                {{
+                    form_errors(form.content)
+                }}
+
+                <button type="submit" class="btn mt-3">Submit</button>
+                
+            {{ form_end(form) }}
+        </div>
+
+        <div class="border p-4 m-2">
+            <h2>Comments : </h2>
+            <div  class="row">
+                {% if comment != null %}
+                    <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                        <div class="card-header">
+                            <strong>{{comment.getUser().getName() | upper}}</strong>
+                        </div>
+                        <div class="card-body text-secondary">
+                            <p class="card-text">{{comment.getContent()}}</p>
+                        </div>
+                        <div class="text-right p-2">
+                            <small>{{comment.getCreationDate() | date}}</small>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

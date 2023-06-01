@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detail{% endblock %}
+
+{% block body %}
+
+    
+    <div class="m-4 p-4">
+        <h2 class="mt-4 p-4">Cart </h2>
+        {% for food in cart %}
+            <div>
+                <div class="col-md-6 col-lg-6">
+                    <div class="single_delicious d-flex align-items-center">
+                        <div class="thumb">
+                            <img width="50" src="{{ food[0].image }}" alt="">
+                        </div>
+                        <div class="info m-3">
+                            <h6>{{ food[0].name }}</h6>
+                            <span>{{ food[1] ~ " x " ~ food[0].price }} €</span>
+                        </div>
+                        <small>
+                            <a class="btn-sm btn btn-primary m-3" href="{{ path('food', { id: food[0].id }) }}">
+                                open
+                            </a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <h2 class="m-3">Total price : {{sum}} €</h2>
+
+        <a class="btn-xl btn btn-danger m-3" href="{{ path('app_pay') }}">
+            Pay
+        </a>
+
+        {# {% if burger|length > 0 %}
+            {% for burger in burger %}
+                {% if burger.image %}
+                    <img src="{{ burger.image }}" style="max-width: 200px" />
+                {% endif %}
+
+                <h4>{{ burger.image }}</h4>
+                <small>
+                    {{ burger.price|format_datetime('medium', 'short') }}
+                </small>
+
+                <p>{{ burger.desc }}</p>
+            {% endfor %}
+        {% else %} #}
+            {# <div>No burger have been posted yet for this burger.</div>
+        {% endif %} #}
+    </div>
+{% endblock %}

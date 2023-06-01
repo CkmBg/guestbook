@@ -53,8 +53,8 @@ class RegistrationFormType extends AbstractType
                     ]),
                     new Regex([
                         'pattern' => '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/',
-                        'match' => false,
-                        'message' => 'Your name cannot contain a number',
+                        'match' => true,
+                        'message' => 'Format password not ok',
                     ])
                 ],
             ]);

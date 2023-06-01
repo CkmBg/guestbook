@@ -37,6 +37,9 @@ class Food
     #[ORM\Column(length: 255)]
     private ?string $categorie = null;
 
+    #[ORM\OneToOne(mappedBy: 'food', cascade: ['persist', 'remove'])]
+    private ?FoodComment $foodComment = null;
+
     public function __construct()
     {
         $this->user = new ArrayCollection();
@@ -117,9 +120,7 @@ class Food
 
     public function addUser(User $user): self
     {
-        if (!$this->user->contains($user)) {
             $this->user->add($user);
-        }
 
         return $this;
     }
@@ -139,6 +140,23 @@ class Food
     public function setCategorie(string $categorie): self
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getFoodComment(): ?FoodComment
+    {
+        return $this->foodComment;
+    }
+
+    public function setFoodComment(FoodComment $foodComment): self
+    {
+        // set the owning side of the relation if necessary
+        if ($foodComment->getFood() !== $this) {
+            $foodComment->setFood($this);
+        }
+
+        $this->foodComment = $foodComment;
 
         return $this;
     }

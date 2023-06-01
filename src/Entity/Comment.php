@@ -25,10 +25,6 @@ class Comment
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photoFilename = null;
 
-    #[ORM\ManyToOne(inversedBy: 'comments')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Food $food = null;
-
 
     public function __toString(): string
     {
@@ -88,15 +84,4 @@ class Comment
         return $this;
     }
 
-    public function getBurger(): ?Food
-    {
-        return $this->food;
-    }
-
-    public function setBurger(?Food $food): self
-    {
-        $this->food = $food;
-
-        return $this;
-    }
 }

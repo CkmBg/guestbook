@@ -37,9 +37,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Food::class, mappedBy: 'user')]
     private Collection $cart;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: FoodComment::class)]
+    private Collection $foodComments;
+
     public function __construct()
     {
         $this->cart = new ArrayCollection();
+        $this->foodComments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -134,10 +138,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function addCart(Food $cart): self
     {
-        if (!$this->cart->contains($cart)) {
             $this->cart->add($cart);
             $cart->addUser($this);
-        }
 
         return $this;
     }
@@ -146,6 +148,47 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->cart->removeElement($cart)) {
             $cart->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    public function emptyCart(): self
+    {
+        foreach ($this->cart as $key => $value) {
+            if ($this->cart->removeElement($value)) {
+                $value->removeUser($this);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FoodComment>
+     */
+    public function getFoodComments(): Collection
+    {
+        return $this->foodComments;
+    }
+
+    public function addFoodComment(FoodComment $foodComment): self
+    {
+        if (!$this->foodComments->contains($foodComment)) {
+            $this->foodComments->add($foodComment);
+            $foodComment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFoodComment(FoodComment $foodComment): self
+    {
+        if ($this->foodComments->removeElement($foodComment)) {
+            // set the owning side to null (unless already changed)
+            if ($foodComment->getUser() === $this) {
+                $foodComment->setUser(null);
+            }
         }
 
         return $this;

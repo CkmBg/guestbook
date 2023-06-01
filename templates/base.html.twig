@@ -12,16 +12,16 @@
         <!-- Place favicon.ico in the root directory -->
 
         <!-- CSS here -->
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/owl.carousel.min.css">
-        <link rel="stylesheet" href="css/magnific-popup.css">
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-        <link rel="stylesheet" href="css/themify-icons.css">
-        <link rel="stylesheet" href="css/nice-select.css">
-        <link rel="stylesheet" href="css/flaticon.css">
-        <link rel="stylesheet" href="css/animate.css">
-        <link rel="stylesheet" href="css/slicknav.css">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href={{ asset("css/bootstrap.min.css") }}>
+        <link rel="stylesheet" href={{ asset("css/owl.carousel.min.css") }}>
+        <link rel="stylesheet" href={{ asset("css/magnific-popup.css") }}>
+        <link rel="stylesheet" href={{ asset("css/font-awesome.min.css") }}>
+        <link rel="stylesheet" href={{ asset("css/themify-icons.css") }}>
+        <link rel="stylesheet" href={{ asset("css/nice-select.css") }}>
+        <link rel="stylesheet" href={{ asset("css/flaticon.css") }}>
+        <link rel="stylesheet" href={{ asset("css/animate.css") }}>
+        <link rel="stylesheet" href={{ asset("css/slicknav.css") }}>
+        <link rel="stylesheet" href={{ asset("css/style.css") }}>
         <!-- <link rel="stylesheet" href="css/responsive.css"> -->
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
@@ -35,18 +35,41 @@
     </head>
     <body>
         {% if app.user %}
+        {% set panier_taille = app.user.getCart() | length %}
         <header>
+            <style>
+                .custom{
+                    margin: 5px;
+                    padding: 10px;
+                    position: fixed;
+                    bottom: 50px;
+                    left: 0px;
+                    background-color: black;
+                    color: red;
+                    font-weight: bold;
+                    text-decoration: none;
+                    transition-duration: 1s;
+                }
+                .custom:hover{
+                    transform: scale(1.2);
+                    transform: translateX(6);
+                }
+            </style>
+            <div class="custom">
+                <a class="active" style="color:white;"  href="{{ path('app_cart') }}">Panier ({{ panier_taille }})</a></li>
+            </div>
             <div class="header-area ">
                 <div id="sticky-header" class="main-header-area">
-                    <div class="container-fluid p-0">
+                    <div class="container-fluid p-3">
                         <div class="row align-items-center no-gutters">
                             <div class="col-xl-5 col-lg-5">
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a class="active" href="{{ path('homepage') }}">Burger</a></li>
-                                            <li><a href="{{ path('drink') }}">Drink</a></li>
-                                            <li><a href="{{ path('dessert') }}">Dessert</a></li>
+                                            <li><a class="active"  href="{{ path('homepage', {type: 'BURGER'}) }}">Burger</a></li>
+                                            <li><a class="active"  href="{{ path('homepage', {type: 'FRITES'}) }}">Frites</a></li>
+                                            <li><a class="active"  href="{{ path('homepage', {type: 'BOISSON'}) }}">Drink</a></li>
+                                            <li><a class="active"  href="{{ path('homepage', {type: 'DESSERT'}) }}">Dessert</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -133,14 +156,15 @@
                         <div class="col-xl-4 col-md-12 col-lg-4">
                                 <div class="footer_widget">
                                         <h3 class="footer_title">
-                                                Stay Connected
+                                                DisConnected <a href={{path("app_logout")}} class="btn btn-danger"> Logout</a>
                                         </h3>
-                                        <form action="#" class="newsletter_form">
-                                            <input type="text" placeholder="Enter your mail">
-                                            <button type="submit">Sign Up</button>
-                                        </form>
-                                        <p class="newsletter_text">Stay connect with us to get exclusive offer!</p>
-                                    </div>
+                                </div>
+                                <div class="footer_widget">
+                                        <h3 class="footer_title">
+                                                Profil
+                                                <a href={{path("app_profil")}} class="btn btn-danger"> Open</a>
+                                        </h3>
+                                </div>
                         </div>
                     </div>
                     <div class="row justify-content-center">
@@ -181,8 +205,8 @@
                             <p class="copy_right text-center">
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             </p>
                         </div>
                     </div>
@@ -193,30 +217,30 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- footer_end  -->
     </body>
         <!-- JS here -->
-    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/isotope.pkgd.min.js"></script>
-    <script src="js/ajax-form.js"></script>
-    <script src="js/waypoints.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/imagesloaded.pkgd.min.js"></script>
-    <script src="js/scrollIt.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <script src="js/wow.min.js"></script>
-    <script src="js/nice-select.min.js"></script>
-    <script src="js/jquery.slicknav.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/plugins.js"></script>
+    <script src={{ asset("js/vendor/modernizr-3.5.0.min.js") }}></script>
+    <script src={{ asset("js/vendor/jquery-1.12.4.min.js") }}></script>
+    <script src={{ asset("js/popper.min.js") }}></script>
+    <script src={{ asset("js/bootstrap.min.js") }}></script>
+    <script src={{ asset("js/owl.carousel.min.js") }}></script>
+    <script src={{ asset("js/isotope.pkgd.min.js") }}></script>
+    <script src={{ asset("js/ajax-form.js") }}></script>
+    <script src={{ asset("js/waypoints.min.js") }}></script>
+    <script src={{ asset("js/jquery.counterup.min.js") }}></script>
+    <script src={{ asset("js/imagesloaded.pkgd.min.js") }}></script>
+    <script src={{ asset("js/scrollIt.js") }}></script>
+    <script src={{ asset("js/jquery.scrollUp.min.js") }}></script>
+    <script src={{ asset("js/wow.min.js") }}></script>
+    <script src={{ asset("js/nice-select.min.js") }}></script>
+    <script src={{ asset("js/jquery.slicknav.min.js") }}></script>
+    <script src={{ asset("js/jquery.magnific-popup.min.js") }}></script>
+    <script src={{ asset("js/plugins.js") }}></script>
 
     <!--contact js-->
-    <script src="js/contact.js"></script>
-    <script src="js/jquery.ajaxchimp.min.js"></script>
-    <script src="js/jquery.form.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
-    <script src="js/mail-script.js"></script>
+    <script src={{ asset("js/contact.js") }}></script>
+    <script src={{ asset("js/jquery.ajaxchimp.min.js") }}></script>
+    <script src={{ asset("js/jquery.form.js") }}></script>
+    <script src={{ asset("js/jquery.validate.min.js") }}></script>
+    <script src={{ asset("js/mail-script.js") }}></script>
 
-    <script src="js/main.js"></script>
+    <script src={{ asset("js/main.js") }}></script>
 </html>

@@ -1,0 +1,167 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{type}}{% endblock %}
+
+
+{% block body %}
+
+    <!-- bradcam_area_start -->
+    <div class="bradcam_area breadcam_bg overlay">
+        <h3>Menu</h3>
+    </div>
+    <!-- bradcam_area_end -->
+
+    <!-- best_burgers_area_start  -->
+    <div class="best_burgers_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section_title text-center mb-80">
+                        <span>{{type}} Menu</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for food in pagination %}
+                    <div class="shadow">
+                        <div class="col-md-6 col-lg-6">
+                            <div class="single_delicious d-flex align-items-center">
+                                <div class="thumb">
+                                    <img width="100" src="{{ food.image }}" alt="">
+                                </div>
+                                <div class="info">
+                                    <h3>{{ food.name }}</h3>
+                                    <span>{{ food.price }} €</span>
+                                </div>
+                                <a class="btn btn-primary m-3" href="{{ path('food', { id: food.id }) }}">
+                                    See
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <style>
+                .paginations{
+                    font-size: 20px;
+                    text-align: center;
+                    padding: 5px;
+                    background-color: whitesmoke;
+                    text-decoration: aqua;
+                }
+                .pagination a{
+                    margin: 5px;
+                }
+            </style>
+            <div class="d-flex justify-content-center paginations">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+    <!-- best_burgers_area_end  -->
+
+    <!-- testimonial_area_start  -->
+    <div class="testimonial_area ">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="section_title mb-60 text-center">
+                        <span>Testimonials</span>
+                        <h3>Customers</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="testmonial_active owl-carousel">
+                        {% for comment in comments %}
+                            <div class="single_carousel">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-8">
+                                        <div class="single_testmonial text-center">
+                                            <div>
+                                                <img style="width:100px" class="rounded" src="{{asset("img_comment/" ~ comment.getPhotoFilename())}}" alt="">
+                                            </div>
+                                            <p>{{comment.getText()}}</p>
+                                            <div class="testmonial_author">
+                                                <div class="thumb">
+                                                    <img src="img/testmonial/1.png" alt="">
+                                                </div>
+                                                <h4>{{comment.getAuthor()}}</h4>
+                                                <div class="stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <h2>No Comment leave</h2>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<!-- testimonial_area_ned  -->
+
+    <!-- instragram_area_start -->
+    <div class="instragram_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="single_instagram">
+                    <img src="img/instragram/1.png" alt="">
+                    <div class="ovrelay">
+                        <a href="#">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="single_instagram">
+                    <img src="img/instragram/2.png" alt="">
+                    <div class="ovrelay">
+                        <a href="#">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="single_instagram">
+                    <img src="img/instragram/3.png" alt="">
+                    <div class="ovrelay">
+                        <a href="#">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="single_instagram">
+                    <img src="img/instragram/4.png" alt="">
+                    <div class="ovrelay">
+                        <a href="#">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- instragram_area_end -->
+
+    <!-- footer_start  -->
+
+
+
+
+{% endblock %}
