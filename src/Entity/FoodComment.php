@@ -28,6 +28,11 @@ class FoodComment
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $creationDate = null;
 
+    public function __toString(): string
+    {
+        return (string) $this->getContent();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

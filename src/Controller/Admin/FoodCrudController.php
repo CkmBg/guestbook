@@ -2,14 +2,14 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Drink;
+use App\Entity\Food;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
-class DrinkCrudController extends AbstractCrudController
+class FoodCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Drink::class;
+        return Food::class;
     }
 
     /*

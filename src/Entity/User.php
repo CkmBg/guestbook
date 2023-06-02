@@ -40,6 +40,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: FoodComment::class)]
     private Collection $foodComments;
 
+    public function __toString(): string
+    {
+        return (string) $this->getEmail();
+    }
+
     public function __construct()
     {
         $this->cart = new ArrayCollection();

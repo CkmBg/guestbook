@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -10,19 +9,18 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 
-use App\Entity\Burger;
-use App\Entity\Drink;
-use App\Entity\Dessert;
 use App\Entity\Comment;
+use App\Entity\Food;
+use App\Entity\FoodComment;
+use App\Entity\User;
 
 class DashboardController extends AbstractDashboardController
 {
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        
         $routeBuilder = $this->container->get(AdminUrlGenerator::class);
-        $url = $routeBuilder->setController(BurgerCrudController::class)->generateUrl();
+        $url = $routeBuilder->setController(FoodCrudController::class)->generateUrl();
 
         return $this->redirect($url);
 
@@ -51,13 +49,11 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'homepage');
-        yield MenuItem::linkToCrud('Drinks', 'fa-solid fa-cup-straw-swoosh', Drink::class);
-        yield MenuItem::linkToCrud('Burgers', 'fa-solid fa-burger', Burger::class);
-        yield MenuItem::linkToCrud('Desserts', 'fa-solid fa-cupcake', Dessert::class);
+        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'homepage', ['type' => 'BURGER'] );
+        yield MenuItem::linkToCrud('Food', 'fas fa-food', Food::class);
         yield MenuItem::linkToCrud('Comments', 'fas fa-comments', Comment::class);
+        yield MenuItem::linkToCrud('FoodComment', 'fas fa-food', FoodComment::class);
+        yield MenuItem::linkToCrud('User', 'fas fa-comments', User::class);
     }
-} 
-// <i class="fa-sharp fa-solid fa-glass"></i>
-// <i class="fa-solid fa-cup-straw-swoosh"></i>
-// <i class="fa-solid fa-cupcake"></i>
+}

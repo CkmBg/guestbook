@@ -40,6 +40,11 @@ class Food
     #[ORM\OneToOne(mappedBy: 'food', cascade: ['persist', 'remove'])]
     private ?FoodComment $foodComment = null;
 
+    public function __toString(): string
+    {
+        return (string) $this->getName();
+    }
+
     public function __construct()
     {
         $this->user = new ArrayCollection();

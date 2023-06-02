@@ -2,15 +2,14 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Burger;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
-
-class BurgerCrudController extends AbstractCrudController
+class UserCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Burger::class;
+        return User::class;
     }
 
     /*
