@@ -23,17 +23,17 @@
             </div>
             <div class="row">
                 {% for food in pagination %}
-                    <div class="shadow">
-                        <div class="col-md-6 col-lg-6">
-                            <div class="single_delicious d-flex align-items-center">
-                                <div class="thumb">
-                                    <img width="100" src="{{ food.image }}" alt="">
+                    <div class="shadow col-md-6 col-lg-6" style="border: solid 0px; padding:30px">
+                        <div >
+                            <div class="single_delicious d-flex align-items-center row">
+                                <div class="thumb col-lg-3" style="border: solid 0px; border-radius: 100%; width:100px; height:100px; ">
+                                    <img width="100" height="100" style="object-fit:contain; border-radius: 500px;" src="{{ food.image }}" alt="">
                                 </div>
-                                <div class="info">
+                                <div class="info col-lg-6" style="border: solid 0px;">
                                     <h3>{{ food.name }}</h3>
                                     <span>{{ food.price }} €</span>
                                 </div>
-                                <a class="btn btn-primary m-3" href="{{ path('food', { id: food.id }) }}">
+                                <a class="btn btn-primary m-3 col-lg-2" style="border: solid 0px;" href="{{ path('food', { id: food.id }) }}">
                                     See
                                 </a>
                             </div>
@@ -46,11 +46,11 @@
                     font-size: 20px;
                     text-align: center;
                     padding: 5px;
-                    background-color: whitesmoke;
                     text-decoration: aqua;
                 }
                 .pagination a{
-                    margin: 5px;
+                    margin: 10px;
+
                 }
             </style>
             <div class="d-flex justify-content-center paginations">
@@ -61,17 +61,17 @@
     <!-- best_burgers_area_end  -->
 
     <!-- testimonial_area_start  -->
-    <div class="testimonial_area ">
-        <div class="container">
+    <div class="testimonial_area " style="border: solid 0px; padding:15px;">
+        <div class="container" style="border: solid 0px">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="section_title mb-60 text-center">
                         <span>Testimonials</span>
-                        <h3>Customers</h3>
+                        <h3 style="font-size:30px;" >Customers</h3>
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" style="border: solid 0px">
                 <div class="col-xl-12">
                     <div class="testmonial_active owl-carousel">
                         {% for comment in comments %}
@@ -107,11 +107,11 @@
                 </div>
             </div>
         </div>
-</div>
+    </div>
 <!-- testimonial_area_ned  -->
 
     <!-- instragram_area_start -->
-    <div class="instragram_area">
+    {# <div class="instragram_area" style="border: solid 1px"> #}
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-6">

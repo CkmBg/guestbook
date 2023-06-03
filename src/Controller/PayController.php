@@ -40,7 +40,7 @@ class PayController extends AbstractController
                 $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $this->getUser()->getName().'-'.uniqid().'.'.$file->guessExtension();
+                $newFilename = $this->getUser()->getName().'-'.uniqid().'.png';
 
                 // Move the file to the directory where brochures are stored
                 try {

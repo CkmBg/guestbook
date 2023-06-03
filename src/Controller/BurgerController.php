@@ -27,7 +27,7 @@ class BurgerController extends AbstractController
         $pagination = $paginator->paginate(
             $foodRepository->findByCategorie($type),
             $request->query->get('page', 1),
-            2
+            6
         );
 
         return $this->render('food/index.html.twig', [
